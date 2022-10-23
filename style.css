@@ -1,0 +1,39 @@
+:root {
+    --sidebarcolor: #0030C4;
+    --headercolor: #1C5BFA;
+    --footercolor: #1C5BFA;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(300px, 20%) 80%;
+    grid-template-rows: 1fr 9fr minmax(50px, 0.5fr);
+}
+
+aside {
+    background-color: var(--sidebarcolor);
+    grid-row: 1/4;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--headercolor);
+    margin: 0;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+footer {
+    background-color: var(--footercolor);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
