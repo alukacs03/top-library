@@ -8,8 +8,11 @@ function Book (title, author, pages, read) {
 }
 
 
-const addBookBtn = document.querySelector('#addbook');
-addBookBtn.addEventListener('click', handleAddingBook);
+const form = document.getElementById('bookForm');
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleAddingBook();
+});
 const titleInput = document.querySelector('#newtitle');
 const authorInput = document.querySelector('#newauthor');
 const pagesInput = document.querySelector('#newpages');
@@ -20,7 +23,6 @@ Book.prototype.addBookToLibrary = function () {
 }
 
 const libraryMain = document.querySelector('main');
-console.log(libraryMain);
 
 function displayBooks(){
     let id = 0;
@@ -41,18 +43,27 @@ function displayBooks(){
                     readDiv.textContent = 'Read?';
                     readDiv.classList.add('col1');
                     articleBody.appendChild(readDiv);
-                    let checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.checked = book[property];
-                    checkbox.classList.add('col2')
-                    articleBody.appendChild(checkbox);
+                    let readDisplay = document.createElement('div');
+                    if (book[property] == true) {
+                        readDisplay.textContent = 'Yep!'
+                    } else {
+                        readDisplay.textContent = 'Not yet :('
+                    }
+                    readDisplay.classList.add('col2');
+                    articleBody.appendChild(readDisplay);
+                    let readbutton = document.createElement('button');
+                    readbutton.textContent = "Toggle Read";
+                    readbutton.classList.add('col12');
+                    readbutton.classList.add('readbutton')
+                    readbutton.addEventListener('click', toggleRead);
+                    articleBody.appendChild(readbutton);
                 }
             }
         }
         let deleteBookBtn = document.createElement('button');
         deleteBookBtn.textContent = 'Delete';
         deleteBookBtn.classList.add("col12")
-        deleteBookBtn.classList.add('deletebtn')
+        deleteBookBtn.classList.add('deletebutton')
         deleteBookBtn.addEventListener('click', deleteBook)
         articleBody.appendChild(deleteBookBtn);
         id += 1;
@@ -60,7 +71,6 @@ function displayBooks(){
 }
 
 function handleAddingBook() {
-    event.preventDefault();
     let currTitle = titleInput.value;
     let currAuthor = authorInput.value;
     let currPages = pagesInput.value;
@@ -68,12 +78,13 @@ function handleAddingBook() {
     let thisBook = new Book(currTitle, currAuthor, currPages, currRead)
     thisBook.addBookToLibrary();
     refreshLibrary();
+    let form = document.getElementById('bookForm');
+    form.reset();
 }
 
 function refreshLibrary() {
     let books = document.querySelectorAll('article')
     books.forEach(book => {
-        console.log(book);
         book.remove();
     });
     displayBooks();
@@ -82,7 +93,11 @@ function refreshLibrary() {
 function deleteBook (e) {
     let index = e.target.parentElement.id;
     myLibrary.splice(index, 1);
-    console.log(e.target.parentElement.id);
-    console.log(myLibrary)
+    refreshLibrary();
+}
+
+function toggleRead (e) {
+    let index = e.target.parentElement.id;
+    myLibrary[index].read = !myLibrary[index].read;
     refreshLibrary();
 }

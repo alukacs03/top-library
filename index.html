@@ -12,7 +12,7 @@
     <header>Library</header>
     <aside>
         <h1>Add a new book</h1>
-        <form>
+        <form id="bookForm" action="/" method="GET">
             <ul>
                 <li>
                     <label for="title">Book title:</label>
@@ -31,7 +31,7 @@
                     <input type="checkbox" name="newread" id="newread">
                 </li>
             </ul>
-            <button id="addbook">Add book</button>
+            <input id="addbook" type="submit" value="Add book">
         </form>
     </aside>
     <main>
