@@ -1,7 +1,8 @@
 :root {
     --sidebarcolor: #0030C4;
-    --headercolor: #1C5BFA;
+    --headercolor: #0d6efd;
     --footercolor: #1C5BFA;
+    --orangecolor: #f56f29;
 }
 
 body {
@@ -88,6 +89,8 @@ article {
     border: 0;
     outline: none;
     border-radius: 2rem;
+    background-color: var(--orangecolor);
+    color: white;
 }
 
 .deletebutton {
@@ -118,11 +121,13 @@ ul {
 }
 
 form {
-    width: 70%;
+    width: 80%;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -134,4 +139,24 @@ input, label {
 
 input {
     margin-bottom: 15px;
+}
+
+input[type="text"], input[type="number"] {
+    width: 15vw;
+    border-radius: 10px;
+    border: 1px solid var(--sidebarcolor);
+    height: 5ch;
+}
+
+
+input[type="submit"] {
+    height: 4rem;
+    width: 10vw;
+    outline: none;
+    border-radius: 1.2rem;
+    border: none;
+    background-color: var(--orangecolor);
+    color: white;
+    font-weight: lighter;
+    font-size: calc(1.5vw);
 }
